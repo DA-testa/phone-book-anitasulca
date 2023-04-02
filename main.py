@@ -21,7 +21,8 @@ def process_queries(queries):
         if cur_query.type == 'add':
             contacts[cur_query.number] = cur_query.name
         elif cur_query.type == 'del':
-            contacts.pop(cur_query.number, None)
+            if cur_query.number in contacts:
+                del contacts[cur_query.number]
         else:
             name = contacts.get(cur_query.number, 'not found')
             result.append(name)
@@ -29,6 +30,7 @@ def process_queries(queries):
 
 if __name__ == '__main__':
     write_responses(process_queries(read_queries()))
+
 
 
 
